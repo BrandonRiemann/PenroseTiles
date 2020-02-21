@@ -56,15 +56,15 @@ class Tile:
 			alpha = np.arctan(thin_height/(0.5*thin_width))
 
 			p1 = Tile(np.array([[shift_x+h*np.cos(alpha+rotate), shift_y+h*np.sin(alpha+rotate)],
-								[shift_x, shift_y],
-								[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)]]),
-								'tL', color='blue')
+				[shift_x, shift_y],
+				[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)]]),
+				'tL', color='blue')
 
 			dist = np.sqrt((base/2)**2+(thin_height*base/thin_width)**2)
 			p2 = Tile(np.array([[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)],
-								[shift_x+dist*np.cos(alpha+rotate), shift_y+dist*np.sin(alpha+rotate)],
-								[shift_x+h*np.cos(alpha+rotate), shift_y+h*np.sin(alpha+rotate)]]),
-								'TL', color='red')
+				[shift_x+dist*np.cos(alpha+rotate), shift_y+dist*np.sin(alpha+rotate)],
+				[shift_x+h*np.cos(alpha+rotate), shift_y+h*np.sin(alpha+rotate)]]),
+				'TL', color='red')
 
 			return [p1, p2]
 
@@ -77,15 +77,15 @@ class Tile:
 			theta = np.arctan(h*np.sin(alpha)/(base-h*np.cos(alpha)))+rotate
 
 			p1 = Tile(np.array([[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)],
-								[shift_x+radius*np.cos(theta), shift_y+radius*np.sin(theta)],
-								[shift_x, shift_y]]),
-								'tR', color='blue')
+				[shift_x+radius*np.cos(theta), shift_y+radius*np.sin(theta)],
+				[shift_x, shift_y]]),
+				'tR', color='blue')
 
 			dist = np.sqrt((base/2)**2+(thin_height*base/thin_width)**2)
 			p2 = Tile(np.array([[shift_x+dist*np.cos(alpha+rotate), shift_y+dist*np.sin(alpha+rotate)],
-								[shift_x, shift_y],
-								[shift_x+radius*np.cos(theta), shift_y+radius*np.sin(theta)]]),
-								'TR', color='red')
+				[shift_x, shift_y],
+				[shift_x+radius*np.cos(theta), shift_y+radius*np.sin(theta)]]),
+				'TR', color='red')
 
 			return [p1, p2]
 
@@ -98,23 +98,23 @@ class Tile:
 			l1h = thick_height*l1/thick_width
 
 			p1 = Tile(np.array([[shift_x, shift_y],
-								[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)],
-								[shift_x+l1/2*np.cos(rotate)-l1h*np.sin(rotate),
-									shift_y+l1h*np.cos(rotate)+l1/2*np.sin(rotate)]]),
-								'TR', color='red')
+				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)],
+				[shift_x+l1/2*np.cos(rotate)-l1h*np.sin(rotate),
+					shift_y+l1h*np.cos(rotate)+l1/2*np.sin(rotate)]]),
+				'TR', color='red')
 
 			p2 = Tile(np.array([[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)],
-								[shift_x+base/2*np.cos(rotate)-bh*np.sin(rotate),
-									shift_y+base/2*np.sin(rotate)+bh*np.cos(rotate)],
-								[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
-								'TL', color='red')
+				[shift_x+base/2*np.cos(rotate)-bh*np.sin(rotate),
+					shift_y+base/2*np.sin(rotate)+bh*np.cos(rotate)],
+				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
+				'TL', color='red')
 
 			p3 = Tile(np.array([[shift_x+base/2*np.cos(rotate)-bh*np.sin(rotate),
-									shift_y+base/2*np.sin(rotate)+bh*np.cos(rotate)],
-								[shift_x+l1/2*np.cos(rotate)-l1h*np.sin(rotate),
-									shift_y+l1/2*np.sin(rotate)+l1h*np.cos(rotate)],
-								[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
-								'tR', color='blue')
+					shift_y+base/2*np.sin(rotate)+bh*np.cos(rotate)],
+				[shift_x+l1/2*np.cos(rotate)-l1h*np.sin(rotate),
+					shift_y+l1/2*np.sin(rotate)+l1h*np.cos(rotate)],
+				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
+				'tR', color='blue')
 		
 			return [p1, p2, p3]
 
@@ -127,23 +127,23 @@ class Tile:
 			l2h = thick_height*l2/thick_width
 
 			p1 = Tile(np.array([[shift_x+base/2*np.cos(rotate)-bh*np.sin(rotate),
-									shift_y+bh*np.cos(rotate)+base/2*np.sin(rotate)],
-								[shift_x, shift_y],	
-								[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
-								'TR', color='red')
+					shift_y+bh*np.cos(rotate)+base/2*np.sin(rotate)],
+				[shift_x, shift_y],	
+				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
+				'TR', color='red')
 
 			p2 = Tile(np.array([[shift_x+(l1+l2/2)*np.cos(rotate)-l2h*np.sin(rotate),
-									shift_y+(l1+l2/2)*np.sin(rotate)+l2h*np.cos(rotate)],
-								[shift_x+base/2*np.cos(rotate)-bh*np.sin(rotate),
-									shift_y+base/2*np.sin(rotate)+bh*np.cos(rotate)],
-								[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
-								'tL', color='blue')
+					shift_y+(l1+l2/2)*np.sin(rotate)+l2h*np.cos(rotate)],
+				[shift_x+base/2*np.cos(rotate)-bh*np.sin(rotate),
+					shift_y+base/2*np.sin(rotate)+bh*np.cos(rotate)],
+				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
+				'tL', color='blue')
 
 			p3 = Tile(np.array([[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)],
-								[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)],
-								[shift_x+(l1+l2/2)*np.cos(rotate)-l2h*np.sin(rotate),
-									shift_y+(l1+l2/2)*np.sin(rotate)+l2h*np.cos(rotate)]]),
-								'TL', color='red')
+				[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)],
+				[shift_x+(l1+l2/2)*np.cos(rotate)-l2h*np.sin(rotate),
+					shift_y+(l1+l2/2)*np.sin(rotate)+l2h*np.cos(rotate)]]),
+				'TL', color='red')
 			
 			return [p1, p2, p3]
 
