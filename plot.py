@@ -176,17 +176,17 @@ base = thick_width    # you can specify a different base length
 
 dist = np.sqrt((base/2)**2+(thick_height)**2)
 test_TL = Tile(np.array([[0,0],
-						 [base*np.cos(angle), base*np.sin(angle)],
-						 [dist*np.cos(angle+np.arctan(thick_height/(0.5*base))),
-						 	dist*np.sin(angle+np.arctan(thick_height/(0.5*base)))]]),
-						 'TL', color='green')
+	[base*np.cos(angle), base*np.sin(angle)],
+	[dist*np.cos(angle+np.arctan(thick_height/(0.5*base))),
+	dist*np.sin(angle+np.arctan(thick_height/(0.5*base)))]]),
+	'TL', color='green')
 
 angle = np.radians(180) # you can change this angle
 test_TR = Tile(np.array([[base*-np.cos(angle),base*-np.sin(angle)],
-						 [base*-np.cos(angle)+base*np.cos(angle), base*np.sin(angle)+base*-np.sin(angle)],
-						 [base*-np.cos(angle)+dist*np.cos(angle+np.arctan(thick_height/(0.5*base))),
-						 	dist*np.sin(angle+np.arctan(thick_height/(0.5*base))+base*-np.sin(angle))]]),
-						 'TR', color='green')
+	[base*-np.cos(angle)+base*np.cos(angle), base*np.sin(angle)+base*-np.sin(angle)],
+	[base*-np.cos(angle)+dist*np.cos(angle+np.arctan(thick_height/(0.5*base))),
+	dist*np.sin(angle+np.arctan(thick_height/(0.5*base))+base*-np.sin(angle))]]),
+	'TR', color='green')
 
 # The number of times we wish to subdivide the tiles
 num_iterations = 6
