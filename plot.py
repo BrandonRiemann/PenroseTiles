@@ -49,8 +49,8 @@ class Tile:
 		# Determine the translation to apply to the subdivisions
 		shift_x, shift_y = xy[0][0], xy[0][1]
 
-		# The given tile will be labeled either tL, TL, tR, or TR, from which we determine how to subdivide
-		if label == 'tL':
+		# The given tile will be labeled either thinLeft, thickLeft, thinRight, or thickRight, from which we determine how to subdivide
+		if label == 'thinLeft':
 			scale = base/np.sqrt((base/thin_width*thin_height)**2+(base/2)**2)
 			h = 2*np.sqrt(base**2-(scale*base/thin_width*thin_height)**2)
 			alpha = np.arctan(thin_height/(0.5*thin_width))
@@ -58,17 +58,17 @@ class Tile:
 			p1 = Tile(np.array([[shift_x+h*np.cos(alpha+rotate), shift_y+h*np.sin(alpha+rotate)],
 				[shift_x, shift_y],
 				[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)]]),
-				'tL', color='blue')
+				'thinLeft', color='blue')
 
 			dist = np.sqrt((base/2)**2+(thin_height*base/thin_width)**2)
 			p2 = Tile(np.array([[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)],
 				[shift_x+dist*np.cos(alpha+rotate), shift_y+dist*np.sin(alpha+rotate)],
 				[shift_x+h*np.cos(alpha+rotate), shift_y+h*np.sin(alpha+rotate)]]),
-				'TL', color='red')
+				'thickLeft', color='red')
 
 			return [p1, p2]
 
-		if label == 'tR':
+		if label == 'thinRight':
 			scale = base/np.sqrt((base/thin_width*thin_height)**2+(base/2)**2)
 			h = 2*np.sqrt(base**2-(scale*base/thin_width*thin_height)**2)
 			alpha = np.arctan(thin_height/(0.5*thin_width))
@@ -79,17 +79,17 @@ class Tile:
 			p1 = Tile(np.array([[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)],
 				[shift_x+radius*np.cos(theta), shift_y+radius*np.sin(theta)],
 				[shift_x, shift_y]]),
-				'tR', color='blue')
+				'thinRight', color='blue')
 
 			dist = np.sqrt((base/2)**2+(thin_height*base/thin_width)**2)
 			p2 = Tile(np.array([[shift_x+dist*np.cos(alpha+rotate), shift_y+dist*np.sin(alpha+rotate)],
 				[shift_x, shift_y],
 				[shift_x+radius*np.cos(theta), shift_y+radius*np.sin(theta)]]),
-				'TR', color='red')
+				'thickRight', color='red')
 
 			return [p1, p2]
 
-		if label == 'TL':
+		if label == 'thickLeft':
 			bh = base/thick_width*thick_height
 			x = np.sqrt((base/2)**2+bh**2)
 			h = x/thick_width*thick_height
@@ -101,24 +101,24 @@ class Tile:
 				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)],
 				[shift_x+l1/2*np.cos(rotate)-l1h*np.sin(rotate),
 					shift_y+l1h*np.cos(rotate)+l1/2*np.sin(rotate)]]),
-				'TR', color='red')
+				'thickRight', color='red')
 
 			p2 = Tile(np.array([[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)],
 				[shift_x+base/2*np.cos(rotate)-bh*np.sin(rotate),
 					shift_y+base/2*np.sin(rotate)+bh*np.cos(rotate)],
 				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
-				'TL', color='red')
+				'thickLeft', color='red')
 
 			p3 = Tile(np.array([[shift_x+base/2*np.cos(rotate)-bh*np.sin(rotate),
 					shift_y+base/2*np.sin(rotate)+bh*np.cos(rotate)],
 				[shift_x+l1/2*np.cos(rotate)-l1h*np.sin(rotate),
 					shift_y+l1/2*np.sin(rotate)+l1h*np.cos(rotate)],
 				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
-				'tR', color='blue')
+				'thinRight', color='blue')
 		
 			return [p1, p2, p3]
 
-		if label == 'TR':
+		if label == 'thickRight':
 			bh = base/thick_width*thick_height
 			x = np.sqrt((base/2)**2+bh**2)
 			h = x/thick_width*thick_height
@@ -130,20 +130,20 @@ class Tile:
 					shift_y+bh*np.cos(rotate)+base/2*np.sin(rotate)],
 				[shift_x, shift_y],	
 				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
-				'TR', color='red')
+				'thickRight', color='red')
 
 			p2 = Tile(np.array([[shift_x+(l1+l2/2)*np.cos(rotate)-l2h*np.sin(rotate),
 					shift_y+(l1+l2/2)*np.sin(rotate)+l2h*np.cos(rotate)],
 				[shift_x+base/2*np.cos(rotate)-bh*np.sin(rotate),
 					shift_y+base/2*np.sin(rotate)+bh*np.cos(rotate)],
 				[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)]]),
-				'tL', color='blue')
+				'thinLeft', color='blue')
 
 			p3 = Tile(np.array([[shift_x+l1*np.cos(rotate), shift_y+l1*np.sin(rotate)],
 				[shift_x+base*np.cos(rotate), shift_y+base*np.sin(rotate)],
 				[shift_x+(l1+l2/2)*np.cos(rotate)-l2h*np.sin(rotate),
 					shift_y+(l1+l2/2)*np.sin(rotate)+l2h*np.cos(rotate)]]),
-				'TL', color='red')
+				'thickLeft', color='red')
 			
 			return [p1, p2, p3]
 
@@ -156,11 +156,11 @@ thin_width = (np.sqrt(5)-1)/2
 thick_height = np.sin(np.radians(36))
 thick_width = (1+np.sqrt(5))/2
 
-# Prototiles: tL, TL, tR, TR
-tL = Tile(np.array([[0,0], [thin_width,0], [thin_width/2, thin_height]]), 'tL', color='blue')
-TL = Tile(np.array([[0,0], [thick_width,0], [thick_width/2, thick_height]]), 'TL', color='red')
-tR = Tile(np.array([[0,0], [thin_width,0], [thin_width/2, thin_height]]), 'tR', color='blue')
-TR = Tile(np.array([[0,0], [thick_width,0], [thick_width/2, thick_height]]), 'TR', color='red')
+# Prototiles: thinLeft, thickLeft, thinRight, thickRight
+thinLeft = Tile(np.array([[0,0], [thin_width,0], [thin_width/2, thin_height]]), 'thinLeft', color='blue')
+thickLeft = Tile(np.array([[0,0], [thick_width,0], [thick_width/2, thick_height]]), 'thickLeft', color='red')
+thinRight = Tile(np.array([[0,0], [thin_width,0], [thin_width/2, thin_height]]), 'thinRight', color='blue')
+thickRight = Tile(np.array([[0,0], [thick_width,0], [thick_width/2, thick_height]]), 'thickRight', color='red')
 
 fig, ax = plt.subplots(figsize=(800/100., 800/100.), dpi=100)
 
@@ -175,24 +175,24 @@ angle = np.radians(0) # you can change this angle
 base = thick_width    # you can specify a different base length
 
 dist = np.sqrt((base/2)**2+(thick_height)**2)
-test_TL = Tile(np.array([[0,0],
+test_thickLeft = Tile(np.array([[0,0],
 	[base*np.cos(angle), base*np.sin(angle)],
 	[dist*np.cos(angle+np.arctan(thick_height/(0.5*base))),
 	dist*np.sin(angle+np.arctan(thick_height/(0.5*base)))]]),
-	'TL', color='green')
+	'thickLeft', color='green')
 
 angle = np.radians(180) # you can change this angle
-test_TR = Tile(np.array([[base*-np.cos(angle),base*-np.sin(angle)],
+test_thickRight = Tile(np.array([[base*-np.cos(angle),base*-np.sin(angle)],
 	[base*-np.cos(angle)+base*np.cos(angle), base*np.sin(angle)+base*-np.sin(angle)],
 	[base*-np.cos(angle)+dist*np.cos(angle+np.arctan(thick_height/(0.5*base))),
 	dist*np.sin(angle+np.arctan(thick_height/(0.5*base))+base*-np.sin(angle))]]),
-	'TR', color='green')
+	'thickRight', color='green')
 
 # The number of times we wish to subdivide the tiles
 num_iterations = 6
 
 # Perform the subdivision
-initial_tiles = test_TL.subdivide()
+initial_tiles = test_thickLeft.subdivide()
 tiles = []
 
 for i in range(num_iterations):
@@ -206,7 +206,7 @@ for i in range(num_iterations):
 for tile in initial_tiles:
 	ax.add_patch(tile.get_patch())
 
-initial_tiles = test_TR.subdivide()
+initial_tiles = test_thickRight.subdivide()
 
 for i in range(num_iterations):
 	for tile in initial_tiles:
